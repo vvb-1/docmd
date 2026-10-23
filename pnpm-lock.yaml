@@ -25,7 +25,7 @@ importers:
         version: 5.6.2
       docmd-search:
         specifier: ^0.1.6
-        version: 0.1.6(@huggingface/transformers@4.2.0(@types/node@26.6.3))(adm-zip@0.6.1)(onnxruntime-node@1.29.0)(protobufjs@8.8.0)(sharp@0.35.4(@types/node@26.6.3))
+        version: 0.1.6(@docmd/engine-js@0.9.7)(@docmd/engine-python@0.9.7)(@docmd/engine-rust@0.9.7)(@huggingface/transformers@4.2.0(@types/node@26.6.3))(adm-zip@0.6.1)(onnxruntime-node@1.29.0)(protobufjs@8.8.0)(sharp@0.35.4(@types/node@26.6.3))
       esbuild:
         specifier: ^0.28.2
         version: 0.28.2
@@ -244,14 +244,14 @@ importers:
         specifier: ^1.48.0
         version: 1.48.0
       markdown-it:
-        specifier: ^14.3.2
-        version: 14.3.2
+        specifier: ^14.3.3
+        version: 14.3.3
       markdown-it-abbr:
         specifier: ^1.0.4
         version: 1.0.4
       markdown-it-attrs:
         specifier: ^4.5.0
-        version: 4.5.0(markdown-it@14.3.2)
+        version: 4.5.0(markdown-it@14.3.3)
       markdown-it-deflist:
         specifier: ^2.1.0
         version: 2.1.0
@@ -402,10 +402,10 @@ importers:
     dependencies:
       docmd-search:
         specifier: '>=0.1.6'
-        version: 0.1.6(@huggingface/transformers@4.2.0(@types/node@24.19.0))(adm-zip@0.6.1)(onnxruntime-node@1.29.0)(protobufjs@8.8.0)(sharp@0.35.4(@types/node@24.19.0))
+        version: 0.1.6(@docmd/engine-js@0.9.7)(@docmd/engine-python@0.9.7)(@docmd/engine-rust@0.9.7)(@huggingface/transformers@4.2.0(@types/node@24.19.0))(adm-zip@0.6.1)(onnxruntime-node@1.29.0)(protobufjs@8.8.0)(sharp@0.35.4(@types/node@24.19.0))
       markdown-it:
-        specifier: ^14.3.2
-        version: 14.3.2
+        specifier: ^14.3.3
+        version: 14.3.3
       minisearch:
         specifier: ^7.2.0
         version: 7.2.0
@@ -546,6 +546,18 @@ packages:
   '@ctrl/tinycolor@4.2.1':
     resolution: {integrity: sha512-Vh5uy9Y1JBMId6J1f68TMXnZrTCvNdo9Fu2k0d1YnJngR+sM5kWTKl441c/3TFs+cG0NWOjRWgQ/iaWhbYx+7A==}
     engines: {node: '>=14'}
+
+  '@docmd/engine-js@0.9.7':
+    resolution: {integrity: sha512-n7+IsHSOeCEO2Bp5Owg9iQ7BlZd0Wu5BVkjEyIrV/8OW97FyoL1EJL2NWr/zEU8R9oO/eVgUknWLMHyYRiNYjQ==}
+    engines: {node: '>=20.0.0'}
+
+  '@docmd/engine-python@0.9.7':
+    resolution: {integrity: sha512-gXhasYfSS2wdMcCmPAahvEV4sEUVxnS3AT1ZzRJrV1KZ8anDCLoseZIsWbJSGODra0vcocqVfRNqK3/M2ySGsQ==}
+    engines: {node: '>=20.0.0'}
+
+  '@docmd/engine-rust@0.9.7':
+    resolution: {integrity: sha512-7oYVUmwCKkuEOH+8qI8C6OyVtmZapnkNWeQbsFCwYjDzjNL+z2prX68Vuo0+hJDxJ9jBYBvdipG0EUx3SgZQ9w==}
+    engines: {node: '>=20.0.0'}
 
   '@emnapi/runtime@1.11.3':
     resolution: {integrity: sha512-Xz4Tpyki7XyrpbUK1jR1AhdAdaXyhhY4lZ3neLodmhpuWfy2PAQN5B46sAiU4liOXGLkHypn/qU+jvfWSCYYLA==}
@@ -1775,8 +1787,8 @@ packages:
   markdown-it-texmath@1.0.0:
     resolution: {integrity: sha512-4hhkiX8/gus+6e53PLCUmUrsa6ZWGgJW2XCW6O0ASvZUiezIK900ZicinTDtG3kAO2kon7oUA/ReWmpW2FByxg==}
 
-  markdown-it@14.3.2:
-    resolution: {integrity: sha512-sHHjZ5fJKlgrG4qns2YwVcdNep35h5fERrfkD2YNsb9UFk0UIHarbiTaHKVMlPuWAoiilyK8Fv/jAm11slsY7Q==}
+  markdown-it@14.3.3:
+    resolution: {integrity: sha512-L//tDAkjTjJCU6pBUSBTgs3Kg4InVaZuUZog/b6V12UKhcDQ7S78877ibbCanRExwPuYP1CZD7Gd2dxSy1GXRg==}
     hasBin: true
 
   marked@16.4.2:
@@ -2065,6 +2077,15 @@ snapshots:
   '@chevrotain/types@11.1.2': {}
 
   '@ctrl/tinycolor@4.2.1': {}
+
+  '@docmd/engine-js@0.9.7':
+    optional: true
+
+  '@docmd/engine-python@0.9.7':
+    optional: true
+
+  '@docmd/engine-rust@0.9.7':
+    optional: true
 
   '@emnapi/runtime@1.11.3':
     dependencies:
@@ -2944,16 +2965,22 @@ snapshots:
     dependencies:
       aiplug: 0.1.2
 
-  docmd-search@0.1.6(@huggingface/transformers@4.2.0(@types/node@24.19.0))(adm-zip@0.6.1)(onnxruntime-node@1.29.0)(protobufjs@8.8.0)(sharp@0.35.4(@types/node@24.19.0)):
+  docmd-search@0.1.6(@docmd/engine-js@0.9.7)(@docmd/engine-python@0.9.7)(@docmd/engine-rust@0.9.7)(@huggingface/transformers@4.2.0(@types/node@24.19.0))(adm-zip@0.6.1)(onnxruntime-node@1.29.0)(protobufjs@8.8.0)(sharp@0.35.4(@types/node@24.19.0)):
     optionalDependencies:
+      '@docmd/engine-js': 0.9.7
+      '@docmd/engine-python': 0.9.7
+      '@docmd/engine-rust': 0.9.7
       '@huggingface/transformers': 4.2.0(@types/node@24.19.0)
       adm-zip: 0.6.1
       onnxruntime-node: 1.29.0
       protobufjs: 8.8.0
       sharp: 0.35.4(@types/node@24.19.0)
 
-  docmd-search@0.1.6(@huggingface/transformers@4.2.0(@types/node@26.6.3))(adm-zip@0.6.1)(onnxruntime-node@1.29.0)(protobufjs@8.8.0)(sharp@0.35.4(@types/node@26.6.3)):
+  docmd-search@0.1.6(@docmd/engine-js@0.9.7)(@docmd/engine-python@0.9.7)(@docmd/engine-rust@0.9.7)(@huggingface/transformers@4.2.0(@types/node@26.6.3))(adm-zip@0.6.1)(onnxruntime-node@1.29.0)(protobufjs@8.8.0)(sharp@0.35.4(@types/node@26.6.3)):
     optionalDependencies:
+      '@docmd/engine-js': 0.9.7
+      '@docmd/engine-python': 0.9.7
+      '@docmd/engine-rust': 0.9.7
       '@huggingface/transformers': 4.2.0(@types/node@26.6.3)
       adm-zip: 0.6.1
       onnxruntime-node: 1.29.0
@@ -3245,9 +3272,9 @@ snapshots:
 
   markdown-it-abbr@1.0.4: {}
 
-  markdown-it-attrs@4.5.0(markdown-it@14.3.2):
+  markdown-it-attrs@4.5.0(markdown-it@14.3.3):
     dependencies:
-      markdown-it: 14.3.2
+      markdown-it: 14.3.3
 
   markdown-it-deflist@2.1.0: {}
 
@@ -3259,7 +3286,7 @@ snapshots:
 
   markdown-it-texmath@1.0.0: {}
 
-  markdown-it@14.3.2:
+  markdown-it@14.3.3:
     dependencies:
       argparse: 2.0.1
       entities: 4.5.0
