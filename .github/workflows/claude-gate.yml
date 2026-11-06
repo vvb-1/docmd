@@ -1,4 +1,4 @@
-# VVB Claude-gate v0.3. Read-only dom på exakt head. Merge kräver alltid Kristians OK.
+# VVB Claude-gate v0.3.1. Read-only dom på exakt head. Merge kräver alltid Kristians OK.
 # Policy ligger i denna workflow (inte i PR-styrd fil) och trädet är default branch.
 name: Claude Gate
 # Triggas bara via kommentar => workflow och policy körs alltid från default branch, aldrig PR-styrd kod med secrets.
@@ -33,7 +33,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           N: ${{ github.event.issue.number }}
         run: |
-          gh api graphql -F n="$N" -F o="${GITHUB_REPOSITORY%/*}" -F r="${GITHUB_REPOSITORY#*/}" -f query='query($o:String!,$r:String!,$n:Int!){repository(owner:$o,name:$r){pullRequest(number:$n){reviewThreads(first:100){nodes{isResolved isOutdated path comments(first:1){nodes{author{login} body}}}}}}}' > ".vvb-gate-threads.json"
+          gh api graphql --paginate --slurp -F n="$N" -F o="${GITHUB_REPOSITORY%/*}" -F r="${GITHUB_REPOSITORY#*/}" -f query='query($o:String!,$r:String!,$n:Int!,$endCursor:String){repository(owner:$o,name:$r){pullRequest(number:$n){reviewThreads(first:100,after:$endCursor){pageInfo{hasNextPage endCursor} nodes{isResolved isOutdated path comments(first:1){nodes{author{login} body}}}}}}}' > ".vvb-gate-threads.json"
       - id: model
         env:
           BODY: ${{ github.event.comment.body }}
