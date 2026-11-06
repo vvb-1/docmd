@@ -32,6 +32,15 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
+      - name: Checka ut PR-head
+        if: github.event.issue.pull_request || github.event_name == 'pull_request_review_comment'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          N: ${{ github.event.pull_request.number || github.event.issue.number }}
+        run: |
+          # Bara PR:er från samma repo (aldrig fork-kod med secrets + skrivtoken)
+          test "$(gh pr view "$N" --json isCrossRepository -q .isCrossRepository)" = "false" || { echo "Fork-PR: avbryter"; exit 1; }
+          gh pr checkout "$N"
       - uses: anthropics/claude-code-action@c0949c50a78c1ec8ce2647db36629b870e715d0c
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
